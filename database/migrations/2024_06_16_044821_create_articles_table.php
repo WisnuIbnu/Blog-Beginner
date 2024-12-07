@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('full_text');
+            $table->string('slug');
+            $table->string('status');
+            $table->integer('views')->default(0);
+            $table->date('publish_date');
             $table->string('image')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('category_id')->constrained();

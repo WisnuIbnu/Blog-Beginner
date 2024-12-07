@@ -1,20 +1,31 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Back\TagsController;
+use App\Http\Controllers\Back\UsersController;
+use App\Http\Controllers\Back\ArticleController;
+use App\Http\Controllers\Back\CategoryController;
+use App\Http\Controllers\Back\DashboardController;
+use App\Http\Middleware\UserAccess;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware('auth')->group(function()
+    {
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+        Route::resource('/article', ArticleController::class);
+        Route::resource('/categories', CategoryController::class)->only([
+            'index','store','update','destroy'
+        ])->middleware(UserAccess::class.':1');
+        Route::resource('/users',UsersController::class);
+        Route::resource('/tags',TagsController::class);
 
-require __DIR__.'/auth.php';
+    });
+
+Auth::routes();
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
+Route::get('/logout',[DashboardController::class,'index'])->name('home');
