@@ -24,14 +24,19 @@
 
             @if (auth()->user()->role == 1)
             <div class="mb-3">
-                <label for="role">Pilih Role</label>
+                <label for="role">Pilih Role<span class="small"> Kolom Ini Harus Pilih</span></label>
                 <select name="role" id="role" class="form-control">
                     <option value="" hidden>Choose Role</option>
                      <option value="1">Admin</option>
                      <option value="2">Penulis</option>
                      <option value="3">Guest</option>
                 </select>
-            </div>
+            @else
+            <label for="role">Pilih Role<span class="small"> Kolom Ini Harus Pilih</span></label>
+                <select name="role" id="role" class="form-control">
+                    <option value="" hidden>Choose Role</option>
+                     <option value="2">Penulis</option>
+                </select>
             @endif
 
             <div class="mb-3">

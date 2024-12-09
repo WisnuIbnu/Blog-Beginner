@@ -13,7 +13,7 @@
             @csrf
 
             <div class="mb-3">
-                <p>Apakah Kamu yakin akan menghapus categori {{ $item->name }} ?</p>
+                <p>Apakah Kamu yakin akan menghapus  {{ $item->name }} ?</p>
             </div>
         
         <div class="modal-footer">

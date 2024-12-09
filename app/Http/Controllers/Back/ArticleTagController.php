@@ -59,6 +59,6 @@ class ArticleTagController extends Controller
     public function destroy(string $id)
     {
         ArticleTags::find($id)->delete();
-        return back()->with('hapus','Categori Telah Berhasil Di Hapus');
+        return back()->with('hapus','Article Telah Berhasil Di Hapus');
     }
 }

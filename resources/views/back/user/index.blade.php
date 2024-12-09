@@ -85,12 +85,11 @@
                         @endif
                         <td>{{ $item->created_at }}</td>
                         <td>
-                            <div class="text-center">
-                            @if (auth()->user()->role == 1)
+                        <div class="text-center">
+                                @if (auth()->user()->role == 1)                                
                                 <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalUpdate{{ $item->id }}">Edit</button>
-                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $item->id }}">Delete</button>
                             @else
-                                <P>Untuk Ubah Password Silahkan Hubungi Admin</P>
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalUpdate{{ $item->id }}">Edit</button>
                             @endif
                             </div>
                         </td>

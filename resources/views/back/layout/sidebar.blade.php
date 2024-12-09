@@ -16,14 +16,14 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ url('article') }}">
               <span data-feather="file" class="align-text-bottom"></span>
-              Article
+              Manage Article
             </a>
           </li>
           @if (auth()->user()->role == 1)
           <li class="nav-item">
             <a class="nav-link" href="{{ url('categories') }}">
               <span data-feather="shopping-cart" class="align-text-bottom"></span>
-            Categories
+            Manage Categories
             </a>
           </li>
           @endif
