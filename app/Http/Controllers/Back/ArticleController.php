@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdateArticleRequest;
+use App\Models\User;
 
 class ArticleController extends Controller
 {
@@ -19,7 +20,8 @@ class ArticleController extends Controller
     public function index()
     {
         return view("back.article.index",[
-            'articles'=> Article::latest()->get()
+            'articles'=> Article::latest()->get(),
+            'user' =>User::get()
         ]); 
 
     }
@@ -30,7 +32,8 @@ class ArticleController extends Controller
     public function create()
     {
         return view('back.article.create',[
-            'categories'=>Category::get()
+            'categories'=>Category::get(),
+            'user' =>User::get()
         ]);
     }
 
@@ -48,7 +51,7 @@ class ArticleController extends Controller
         
         $data['image'] = $fileName;
         $data['slug'] = Str::slug($data['title']);
-
+        
         Article::create($data);
 
         return redirect(url('article'))->with('success', 'Berhasil Membuat Article Baru');
@@ -71,7 +74,8 @@ class ArticleController extends Controller
     {
         return view('back.article.update',[
             'article'   => Article::find($id),
-            'categories'=>Category::get()
+            'categories'=>Category::get(),
+            'user' =>User::get()
         ]);
     }
 

@@ -1,18 +1,23 @@
 <?php
 
+use App\Http\Middleware\UserAccess;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Back\TagsController;
 use App\Http\Controllers\Back\UsersController;
+use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Back\ArticleController;
 use App\Http\Controllers\Back\CategoryController;
 use App\Http\Controllers\Back\DashboardController;
-use App\Http\Middleware\UserAccess;
+use App\Http\Controllers\Back\ArticleTagController;
+use App\Http\Controllers\Front\ArticleController as FrontArticleController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/',[HomeController::class,'index']);
+Route::get('/p/{slug}',[FrontArticleController::class, 'show']);
 
 Route::middleware('auth')->group(function()
     {
@@ -23,6 +28,7 @@ Route::middleware('auth')->group(function()
         ])->middleware(UserAccess::class.':1');
         Route::resource('/users',UsersController::class);
         Route::resource('/tags',TagsController::class);
+        Route::resource('/article_tags', ArticleTagController::class); 
 
     });
 

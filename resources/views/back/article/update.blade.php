@@ -73,8 +73,13 @@
             </div>
 
             <div class="mb-3">
-                <label for="user_id">Masukan User_id</label>
-                <input type="number" name="user_id" id="user_id" class="form-control" value="{{ old('user_id', $article->user_id) }}">
+                <label for="user_id">Pilih Nama Anda</label>
+                <select name="category_id" id="category_id" class="form-control">
+                       <option value="" hidden>Choose</option>
+                            @foreach ($user as $item )
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="row">
