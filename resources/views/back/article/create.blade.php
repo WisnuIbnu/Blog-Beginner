@@ -1,3 +1,4 @@
+use Yajra\DataTables\Contracts\DataTable;
 @extends('back.layout.tamplate')
 
 @push('css')
@@ -40,6 +41,7 @@
                         <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}">
                     </div>
                 </div>
+                     
                 <div class="col-6">
                     <div class="mb-3">
                         <label for="category_id">Category</label>

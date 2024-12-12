@@ -74,23 +74,22 @@
                             <td>
                                 <span class="">Admin</span>
                             </td>
-                        @elseif ($item->role == 2) 
+                        @else 
                             <td>
                                 <span class="">Penulis</span>
-                            </td>
-                        @else    
-                            <td>
-                                <span class="">Guest</span>
                             </td> 
                         @endif
                         <td>{{ $item->created_at }}</td>
                         <td>
                         <div class="text-center">
-                                @if (auth()->user()->role == 1)                                
-                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalUpdate{{ $item->id }}">Edit</button>
-                            @else
-                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalUpdate{{ $item->id }}">Edit</button>
-                            @endif
+                            @if (auth()->user()->role == 1)                                       <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalUpdate{{ $item->id }}">
+                                                Edit Akun
+                                        </button>
+                                @elseif (auth()->user()->role == 2)
+                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalUpdate{{ auth()->user()->id }}">
+                                        Edit Akun
+                                    </button>
+                                @endif
                             </div>
                         </td>
                     </tr>
