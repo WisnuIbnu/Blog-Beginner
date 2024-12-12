@@ -19,15 +19,18 @@ class ArticleController extends Controller
      */
     public function index()
     {
+
+        $articles = Article::where('user_id', auth()->id())->get(); // Filter berdasarkan user_id
         return view("back.article.index",[
             'articles'=> Article::latest()->get(),
-            'user' =>User::get()
+            'user' =>User::get(),
+            'article'=> $articles
         ]); 
 
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creatings a new resource.
      */
     public function create()
     {

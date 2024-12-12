@@ -62,7 +62,8 @@
                     <th class="text-center">Function</th>
                 </tr>
             </thead>
-
+            article
+            @if (auth()->user()->role == 1)
             <tbody>
             @foreach ($articles as $item)
                 <tr>
@@ -92,6 +93,37 @@
                 </tr>
             @endforeach
             </tbody>
+            @else
+            <tbody>
+            @foreach ($article as $item)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $item->title }}</td>
+                    <td>{{ $item->Category->name }}</td>
+                    <td>{{ $item->views }}x</td>
+                    
+                    @if ($item->status == 0)
+                        <td>
+                            <span class="badge bg-danger">Private</span>
+                        </td>
+                    @else
+                        <td>
+                            <span class="badge bg-success">Published</span>
+                        </td>
+                    @endif
+
+                    <td>{{ $item->publish_date }}</td>
+                    <td>
+                        <div class="text-center">
+                            <a href="{{ url('article/'.$item->id) }}" class="btn btn-secondary">Detail</a>
+                            <a href="{{ url('article/'.$item->id . '/edit') }}" class="btn btn-success">Edit</a>
+                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalHapus{{ $item->id }}">Hapus</button>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+            @endif
         </table>
       </div>
       @include('back.article.delete-modal')
